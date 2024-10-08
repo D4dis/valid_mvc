@@ -20,6 +20,8 @@ $title = 'One Day One Job';
   <link rel="stylesheet" href="../assets/css/login.css">
 </head>
 
+<?php include 'partials/navbar.php'; ?>
+
 <body>
   <div class="container" id="container">
     <div class="form-container sign-up">
