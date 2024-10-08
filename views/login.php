@@ -27,7 +27,7 @@ $title = 'One Day One Job';
     <div class="form-container sign-up">
       <form action="" method="post">
         <h1>Créer un compte</h1>
-        <span>ou utilisez votre email pour vous enregistrer</span>
+        <span>Utilisez votre email pour vous enregistrer</span>
         <div class="d-flex radioGroupe">
           <label for="entreprise">Entreprise</label>
           <input type="radio" id="entreprise" name="type" value="entreprise">
