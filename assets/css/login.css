@@ -160,25 +160,6 @@ body {
     }
 }
 
-.social-icons {
-    margin: 20px 0;
-}
-
-.social-icons a {
-    border: 1px solid #ccc;
-    border-radius: 20%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 3px;
-    width: 40px;
-    height: 40px;
-}
-
-.social-icons a:hover {
-    color: #512da8;
-}
-
 .toggle-container {
     position: absolute;
     top: 0;
@@ -199,7 +180,6 @@ body {
 .toggle {
     background-color: var(--main-color);
     height: 100%;
-    /* background: linear-gradient(to right, #5c6BC0, #512da8); */
     color: #FFF;
     position: relative;
     left: -100%;
