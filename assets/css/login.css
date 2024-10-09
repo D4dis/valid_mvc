@@ -11,7 +11,7 @@
 :root {
     --main-color: #5c6BC0;
     --bg-button-black: #000;
-    --bg-background : #c9d6ff;
+    --bg-background: #DADADA;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 }
 
 .d-flex {
-  display: flex;
+    display: flex;
 }
 
 .container {
@@ -99,19 +99,19 @@ body {
 }
 
 .radioGroupe {
-  gap: 5px;
+    gap: 5px;
 }
 
 .radioGroupe label {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .radioGroupe input {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .radioGroupe input:first-of-type {
-  margin-right: 50px;
+    margin-right: 50px;
 }
 
 .form-container {

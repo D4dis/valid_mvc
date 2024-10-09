@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-color: #DADADA;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  width: 1440px;
+  margin: auto;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 92px;
+
+}
+
+h1 {
+  margin-top: 100px;
+  font-size: 48px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.container .mid {
+  height: 70px;
+}
+
+.container .mid li {
+  display: flex;
+  justify-content: center;
+}
+
+.container .mid li .search-bar {
+  width: 700px;
+  background: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.container .mid li .search-bar .row {
+  display: flex;
+  height: 70px;
+  align-items: center;
+}
+
+.container .mid li .search-bar .row .container-searchJob {
+  width: 295px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.container .mid li .search-bar .row .line {
+  height: 100%;
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.container .mid li .search-bar .row .container-searchLoc {
+  position: relative;
+  width: 295px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.container .mid li .search-bar .row .container-searchLoc::before {
+  content: "\f0b1";
+  color: rgba(0, 0, 0, 0.50);
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-right: 15px;
+}
+
+.container .mid li .search-bar .row .container-searchJob::before {
+  content: "\f002";
+  color: rgba(0, 0, 0, 0.50);
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 15px;
+}
+
+.container .mid li .search-bar input {
+  width: 150px;
+  flex: 1;
+  height: 20px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+}
+
+.container .mid li .search-bar button {
+  width: 110px;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: #5C6BC0;
+  border: 0;
+  cursor: pointer;
+}
+
+.container .mid li.search-group {
+  z-index: 9;
+}
+
+.container .mid li .search-bar button .fa-solid {
+  cursor: pointer;
+}
+
+.container .mid li .search-bar .result-box ul {
+  border-top: 1px solid #999;
+  padding: 10px 15px;
+}
+
+.container .mid li .search-bar .result-box ul li {
+  color: #000;
+  font-size: 16px;
+  border-radius: 3px;
+  padding: 15px 10px;
+  cursor: pointer;
+}
+
+.container .mid li .search-bar .result-box ul li:hover {
+  background: #e9f3ff;
+}
+
+
+.container .bot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container .bot .card {
+  width: 260px;
+  height: 400px;
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.container .bot .card .card-top {
+  height: 220px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.container .bot .card .card-bot {
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  height: 180px;
+  background-color: #5C6BC0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px;
+}
+
+.container .bot .card .card-bot i {
+  color: #000;
+  margin-right: 10px;
+}
+
+.container .bot .card .card-bot .type {
+  text-align: center;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 600;
+  width: 60px;
+  height: 23px;
+  border-radius: 50px;
+  background-color: #006A4E;
+  padding-top: 2px;
+}
+

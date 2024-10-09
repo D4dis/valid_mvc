@@ -18,9 +18,10 @@ $title = 'One Day One Job';
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../assets/css/login.css">
+  <link rel="stylesheet" href="../assets/css/nav.css">
 </head>
 
-<?php include 'partials/navbar.php'; ?>
+<!-- <?php include 'partials/navbar.php'; ?> -->
 
 <body>
   <div class="container" id="container">
@@ -65,7 +66,7 @@ $title = 'One Day One Job';
       </div>
     </div>
   </div>
-  <script src="../assets/js/script.js"></script>
+  <script src="../assets/js/login.js"></script>
 </body>
 
 </html>

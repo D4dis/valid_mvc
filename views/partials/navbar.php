@@ -1,9 +1,9 @@
 <nav class="navbar">
   <div class="container-nav">
-    <a href="localhost/formation/valid-mvc/index.php">One Day One Job</a>
+    <a href="#">One Day One Job</a>
     <div class="icons">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <i class="fa-solid fa-user"></i>
+      <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href=""><i class="fa-solid fa-user"></i></a>
     </div>
   </div>
 </nav>
