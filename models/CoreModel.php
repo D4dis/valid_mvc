@@ -17,6 +17,13 @@ abstract class CoreModel
     $this->connect();
   }
 
+  /**
+   * Connexion a la base de donnée
+   * 
+   * @return void
+   * 
+   */
+
 
   private function connect(): void
   {
@@ -27,6 +34,13 @@ abstract class CoreModel
       die($e->getMessage());
     }
   }
+
+  /**
+   * Getter de _db qui nous retourne un objet PDO
+   * 
+   * @return PDO
+   * 
+   */
 
   protected function getDb(): PDO
   {

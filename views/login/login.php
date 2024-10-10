@@ -16,13 +16,20 @@ $title = 'One Day One Job';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../assets/css/login.css">
-  <link rel="stylesheet" href="../assets/css/nav.css">
+  <link rel="stylesheet" href="views/login/assets/css/login.css">
+  <link rel="stylesheet" href="views/partials/navbar/assets/css/nav.css">
 </head>
 
 <!-- <?php include 'partials/navbar.php'; ?> -->
 
 <body>
+  <?php if (isset($error) && !empty($error)): ?>
+    <div class="error-message"><?php echo $error; ?></div>
+  <?php endif; ?>
+  <?php if (isset($success) && !empty($success)): ?>
+    <div class="success-message"><?php echo $success; ?></div>
+  <?php endif; ?>
+
   <div class="container" id="container">
     <div class="form-container sign-up">
       <form action="" method="post">
@@ -30,15 +37,15 @@ $title = 'One Day One Job';
         <span>Utilisez votre email pour vous enregistrer</span>
         <div class="d-flex radioGroupe">
           <label for="entreprise">Entreprise</label>
-          <input type="radio" id="entreprise" name="type" value="entreprise">
+          <input type="radio" id="entreprise" name="role" value="1" required>
           <label for="etudiant">Etudiant</label>
-          <input type="radio" id="etudiant" name="type" value="etudiant">
+          <input type="radio" id="etudiant" name="role" value="2" required>
         </div>
-        <input type="text" name="nameSignUp" id="nameSignUp" placeholder="Nom">
-        <input type="email" name="emailSignUp" id="emailSignUp" placeholder="Email">
-        <input type="password" name="pwdSignUp" id="pwdSignUp" placeholder="Mot de passe">
-        <input type="password" name="ConfpwdSignUp" id="ConfpwdSignUp" placeholder="Confirmer le mot de passe">
-        <button type="submit">S'enregistrer</button>
+        <input type="text" name="nameSignUp" id="nameSignUp" placeholder="Nom" required>
+        <input type="email" name="emailSignUp" id="emailSignUp" placeholder="Email" required>
+        <input type="password" name="pwdSignUp" id="pwdSignUp" placeholder="Mot de passe" required>
+        <input type="password" name="ConfpwdSignUp" id="ConfpwdSignUp" placeholder="Confirmer le mot de passe" required>
+        <button type="submit" name="signup">S'inscrire</button>
       </form>
     </div>
     <div class="form-container sign-in">
@@ -65,7 +72,7 @@ $title = 'One Day One Job';
       </div>
     </div>
   </div>
-  <script src="../assets/js/login.js"></script>
+  <script src="views/login/assets/js/login.js"></script>
 </body>
 
 </html>
