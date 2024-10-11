@@ -10,11 +10,7 @@ abstract class CoreEntity
   public function hydrate(array $data)
   {
     foreach ($data as $key => $value) {
-      $key = substr($key, 2);
-      if (substr($key, -3) == '_fk') {
-        $key = substr($key, 0, -3);
-      }
-      $method = 'set' . ucfirst($key);
+      $method = 'set' . ucfirst(substr($key, 4, strlen($key)-4));
       if (method_exists($this, $method)) {
         $this->$method($value);
       }

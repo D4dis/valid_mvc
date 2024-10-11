@@ -45,22 +45,24 @@ $title = 'Acceuil';
       </form>
     </div>
     <div class="bot">
-      <div class="card">
-        <div class="card-top">
-          <h2>Titre</h2>
-          <h2>Nom entreprise</h2>
+      <a href="">
+        <div class="card">
+          <div class="card-top">
+            <h2>Titre</h2>
+            <h2>Nom entreprise</h2>
+          </div>
+          <div class="card-bot">
+            <div class="type">CDI</div>
+            <div class="location"><i class="fa-solid fa-location-dot"></i>Montpellier</div>
+            <div class="categorie"><i class="fa-solid fa-briefcase"></i>Design</div>
+          </div>
         </div>
-        <div class="card-bot">
-          <div class="type">CDI</div>
-          <div class="location"><i class="fa-solid fa-location-dot"></i>Montpellier</div>
-          <div class="categorie"><i class="fa-solid fa-briefcase"></i>Design</div>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 
 </body>
 
-<script src="assets/js/index.js"></script>
+<script src="views/home/assets/js/index.js"></script>
 
 </html>

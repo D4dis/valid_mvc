@@ -20,8 +20,6 @@ $title = 'One Day One Job';
   <link rel="stylesheet" href="views/partials/navbar/assets/css/nav.css">
 </head>
 
-<!-- <?php include 'partials/navbar.php'; ?> -->
-
 <body>
   <?php if (isset($error) && !empty($error)): ?>
     <div class="error-message"><?php echo $error; ?></div>
@@ -37,7 +35,7 @@ $title = 'One Day One Job';
         <span>Utilisez votre email pour vous enregistrer</span>
         <div class="d-flex radioGroupe">
           <label for="entreprise">Entreprise</label>
-          <input type="radio" id="entreprise" name="role" value="1" required>
+          <input type="radio" id="entreprise" name="role" value="3" required>
           <label for="etudiant">Etudiant</label>
           <input type="radio" id="etudiant" name="role" value="2" required>
         </div>
