@@ -18,7 +18,7 @@ switch ($route) {
         $userController->login();
         break;
     case 'user':
-        $userController->viewProfile();
+        $userController->showUserPage();
     case 'logout':
         $userController = new UserController($db);
         $userController->logout();

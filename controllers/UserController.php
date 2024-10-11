@@ -152,4 +152,5 @@ class UserController
         $title = $_SESSION['user_name'];
         require 'views/userPage/userPage.php';
     }
+
 }
