@@ -17,11 +17,14 @@ switch ($route) {
         $userController = new UserController($db);
         $userController->login();
         break;
-    case 'user':
+    case 'userPage':
+        $userController = new UserController($db);
         $userController->showUserPage();
+        break;
     case 'logout':
         $userController = new UserController($db);
         $userController->logout();
+        break;
     default:
         $title = 'Accueil';
         include __DIR__ . '/views/home/home.php';

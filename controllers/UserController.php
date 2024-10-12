@@ -83,6 +83,9 @@ class UserController
                 $_SESSION['connected'] == 1;
                 $_SESSION['user_id'] = $user['use_id'];
                 $_SESSION['user_name'] = $user['use_name'];
+                $_SESSION['user_email'] = $user['use_login'];
+                $_SESSION['user_city'] = $user['use_city'];
+                $_SESSION['user_skill'] = $user['use_skill'];
                 $_SESSION['user_role'] = $user['rol_id'];
                 $_SESSION['success'] = "Connexion réussie !";
                 header('Location: index.php');
@@ -149,8 +152,8 @@ class UserController
     #USER PAGE
 
     public function showUserPage($error = null, $succes = null) {
-        $title = $_SESSION['user_name'];
-        require 'views/userPage/userPage.php';
+        $title = $_SESSION['user_name'] . " - Page";
+        require 'views/userPage.php';
     }
 
 }
