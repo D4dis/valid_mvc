@@ -25,9 +25,9 @@ $title = 'Acceuil';
   <div class="container">
     <div class="top">
       <h1>One Day One Job</h1>
-      <p><?= isset($_SESSION) ?  $_SESSION['user_id'] : '' ?></p>
-      <p><?= isset($_SESSION) ?  $_SESSION['user_name'] : '' ?></p>
-      <p><?= isset($_SESSION) ?  $_SESSION['connected'] : '' ?></p>
+      <p><?= isset($_SESSION) && !empty($_SESSION['user_id']) ?  $_SESSION['user_id'] : '' ?></p>
+      <p><?= isset($_SESSION) && !empty($_SESSION['user_name']) ?  $_SESSION['user_name'] : '' ?></p>
+      <p><?= isset($_SESSION) && !empty($_SESSION['connected']) ?  $_SESSION['connected'] : '' ?></p>
     </div>
     <div class="mid">
       <form method="get">

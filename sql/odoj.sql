@@ -1,100 +1,225 @@
-#------------------------------------------------------------
-#        Script MySQL.
-#------------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : sam. 12 oct. 2024 à 15:49
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-#------------------------------------------------------------
-# Table: skills
-#------------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE skills(
-        s_id    Int  Auto_increment  NOT NULL ,
-        s_label Varchar (50) NOT NULL
-	,CONSTRAINT skills_PK PRIMARY KEY (s_id)
-)ENGINE=InnoDB;
+--
+-- Base de données : `odoj`
+--
 
+-- --------------------------------------------------------
 
-#------------------------------------------------------------
-# Table: role
-#------------------------------------------------------------
+--
+-- Structure de la table `apply`
+--
 
-CREATE TABLE role(
-        r_id    Int  Auto_increment  NOT NULL ,
-        r_label Varchar (50) NOT NULL
-	,CONSTRAINT role_PK PRIMARY KEY (r_id)
-)ENGINE=InnoDB;
+CREATE TABLE `apply` (
+  `use_id` int(11) NOT NULL,
+  `job_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
 
-#------------------------------------------------------------
-# Table: user
-#------------------------------------------------------------
+--
+-- Structure de la table `has`
+--
 
-CREATE TABLE user(
-        u_id   Int  Auto_increment  NOT NULL ,
-        u_nom  Varchar (50) NOT NULL ,
-        u_mail Varchar (50) NOT NULL ,
-        u_mdp  Varchar (100) NOT NULL ,
-        u_role Int NOT NULL ,
-        r_id   Int NOT NULL
-	,CONSTRAINT user_PK PRIMARY KEY (u_id)
+CREATE TABLE `has` (
+  `rol_id` int(11) NOT NULL,
+  `aut_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-	,CONSTRAINT user_role_FK FOREIGN KEY (r_id) REFERENCES role(r_id)
-)ENGINE=InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `joboffer`
+--
 
-#------------------------------------------------------------
-# Table: offre
-#------------------------------------------------------------
+CREATE TABLE `joboffer` (
+  `job_id` int(11) NOT NULL,
+  `job_title` varchar(50) DEFAULT NULL,
+  `job_describe` varchar(250) DEFAULT NULL,
+  `job_salary` decimal(5,2) DEFAULT NULL,
+  `job_status` tinyint(1) DEFAULT NULL,
+  `job_requirement` varchar(50) DEFAULT NULL,
+  `use_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE offre(
-        o_id           Int  Auto_increment  NOT NULL ,
-        o_titre        Varchar (100) NOT NULL ,
-        o_salaire      Float NOT NULL ,
-        o_description  Varchar (250) NOT NULL ,
-        o_type_contrat Varchar (250) NOT NULL ,
-        o_statut       Bool NOT NULL ,
-        u_id           Int NOT NULL
-	,CONSTRAINT offre_PK PRIMARY KEY (o_id)
+-- --------------------------------------------------------
 
-	,CONSTRAINT offre_user_FK FOREIGN KEY (u_id) REFERENCES user(u_id)
-)ENGINE=InnoDB;
+--
+-- Structure de la table `role`
+--
 
+CREATE TABLE `role` (
+  `rol_id` int(11) NOT NULL,
+  `rol_label` varchar(50) DEFAULT NULL,
+  `rol_power` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-#------------------------------------------------------------
-# Table: permission
-#------------------------------------------------------------
+--
+-- Déchargement des données de la table `role`
+--
 
-CREATE TABLE permission(
-        p_id    Int  Auto_increment  NOT NULL ,
-        p_label Varchar (50) NOT NULL
-	,CONSTRAINT permission_PK PRIMARY KEY (p_id)
-)ENGINE=InnoDB;
+INSERT INTO `role` (`rol_id`, `rol_label`, `rol_power`) VALUES
+(1, 'admin', 1),
+(2, 'etudiant', 2),
+(3, 'entreprise', 3);
 
+-- --------------------------------------------------------
 
-#------------------------------------------------------------
-# Table: competences
-#------------------------------------------------------------
+--
+-- Structure de la table `_authorization`
+--
 
-CREATE TABLE competences(
-        s_id Int NOT NULL ,
-        u_id Int NOT NULL
-	,CONSTRAINT competences_PK PRIMARY KEY (s_id,u_id)
+CREATE TABLE `_authorization` (
+  `aut_id` int(11) NOT NULL,
+  `aut_label` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-	,CONSTRAINT competences_skills_FK FOREIGN KEY (s_id) REFERENCES skills(s_id)
-	,CONSTRAINT competences_user0_FK FOREIGN KEY (u_id) REFERENCES user(u_id)
-)ENGINE=InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Structure de la table `_user`
+--
 
-#------------------------------------------------------------
-# Table: pouvoir
-#------------------------------------------------------------
+CREATE TABLE `_user` (
+  `use_id` int(11) NOT NULL,
+  `use_name` varchar(50) DEFAULT NULL,
+  `use_login` varchar(50) DEFAULT NULL,
+  `use_password` varchar(200) DEFAULT NULL,
+  `use_city` varchar(50) DEFAULT NULL,
+  `use_zipcode` int(11) DEFAULT NULL,
+  `use_siret` int(11) DEFAULT NULL,
+  `use_company` varchar(50) DEFAULT NULL,
+  `use_skills` varchar(50) DEFAULT NULL,
+  `rol_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE pouvoir(
-        p_id Int NOT NULL ,
-        r_id Int NOT NULL
-	,CONSTRAINT pouvoir_PK PRIMARY KEY (p_id,r_id)
+--
+-- Déchargement des données de la table `_user`
+--
 
-	,CONSTRAINT pouvoir_permission_FK FOREIGN KEY (p_id) REFERENCES permission(p_id)
-	,CONSTRAINT pouvoir_role0_FK FOREIGN KEY (r_id) REFERENCES role(r_id)
-)ENGINE=InnoDB;
+INSERT INTO `_user` (`use_id`, `use_name`, `use_login`, `use_password`, `use_city`, `use_zipcode`, `use_siret`, `use_company`, `use_skills`, `rol_id`) VALUES
+(1, 'daris', 'daris@email.com', '$2y$10$TuWTq3VuBCOCcOJNb.WY9.yHBIII5Q2Q665OEJxZh1uvGdVQw0X1e', NULL, NULL, NULL, NULL, NULL, 2);
 
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `apply`
+--
+ALTER TABLE `apply`
+  ADD PRIMARY KEY (`use_id`,`job_id`),
+  ADD KEY `job_id` (`job_id`);
+
+--
+-- Index pour la table `has`
+--
+ALTER TABLE `has`
+  ADD PRIMARY KEY (`rol_id`,`aut_id`),
+  ADD KEY `aut_id` (`aut_id`);
+
+--
+-- Index pour la table `joboffer`
+--
+ALTER TABLE `joboffer`
+  ADD PRIMARY KEY (`job_id`),
+  ADD KEY `use_id` (`use_id`);
+
+--
+-- Index pour la table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`rol_id`);
+
+--
+-- Index pour la table `_authorization`
+--
+ALTER TABLE `_authorization`
+  ADD PRIMARY KEY (`aut_id`);
+
+--
+-- Index pour la table `_user`
+--
+ALTER TABLE `_user`
+  ADD PRIMARY KEY (`use_id`),
+  ADD KEY `rol_id` (`rol_id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `joboffer`
+--
+ALTER TABLE `joboffer`
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `role`
+--
+ALTER TABLE `role`
+  MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `_authorization`
+--
+ALTER TABLE `_authorization`
+  MODIFY `aut_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `_user`
+--
+ALTER TABLE `_user`
+  MODIFY `use_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `apply`
+--
+ALTER TABLE `apply`
+  ADD CONSTRAINT `apply_ibfk_1` FOREIGN KEY (`use_id`) REFERENCES `_user` (`use_id`),
+  ADD CONSTRAINT `apply_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `joboffer` (`job_id`);
+
+--
+-- Contraintes pour la table `has`
+--
+ALTER TABLE `has`
+  ADD CONSTRAINT `has_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `role` (`rol_id`),
+  ADD CONSTRAINT `has_ibfk_2` FOREIGN KEY (`aut_id`) REFERENCES `_authorization` (`aut_id`);
+
+--
+-- Contraintes pour la table `joboffer`
+--
+ALTER TABLE `joboffer`
+  ADD CONSTRAINT `joboffer_ibfk_1` FOREIGN KEY (`use_id`) REFERENCES `_user` (`use_id`);
+
+--
+-- Contraintes pour la table `_user`
+--
+ALTER TABLE `_user`
+  ADD CONSTRAINT `_user_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `role` (`rol_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
