@@ -24,9 +24,9 @@
 
   function loadEntity(string $entity)
   {
-    if(file_exists('entity/'.$entity.'.php'))
+    if(file_exists('class/'.$entity.'.php'))
     {
-      require_once 'entity/'.$entity.'.php';
+      require_once 'class/'.$entity.'.php';
     }
   }
 

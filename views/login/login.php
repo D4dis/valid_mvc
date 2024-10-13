@@ -22,10 +22,10 @@ $title = 'One Day One Job';
 
 <body>
   <?php if (isset($error) && !empty($error)): ?>
-    <div class="error-message"><?php echo $error; ?></div>
+    <div><?php echo $error; ?></div>
   <?php endif; ?>
   <?php if (isset($success) && !empty($success)): ?>
-    <div class="success-message"><?php echo $success; ?></div>
+    <div><?php echo $success; ?></div>
   <?php endif; ?>
 
   <div class="container" id="container">

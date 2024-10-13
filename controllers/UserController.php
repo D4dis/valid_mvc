@@ -1,18 +1,17 @@
 <?php
 
 require_once 'models/UserModel.php';
+require_once 'class/User.php';
 
 class UserController
 {
     private $userModel;
+    private $db;
 
-    public function __construct($params)
+    public function __construct($db)
     {
-        $this->userModel = new UserModel($params);
-    }
-
-    public function is_connected() : bool {
-        return !empty($_SESSION['connected']);
+        $this->db = $db;
+        $this->userModel = new UserModel($db);
     }
 
     public function login()
@@ -28,7 +27,7 @@ class UserController
             exit();
         }
 
-        require_once __DIR__ . '/../views/login/login.php';
+        require_once 'views/login/login.php';
     }
 
     public function signup()
@@ -39,7 +38,7 @@ class UserController
             exit();
         }
 
-        require_once __DIR__ . '/../views/signup/signup.php';
+        require_once '../views/signup/signup.php';
     }
 
     private function handleSignup($data)
@@ -80,7 +79,7 @@ class UserController
             $user = $this->userModel->getUserByEmail($data['emailSignIn']);
 
             if ($user && password_verify($data['pwdSignIn'], $user['use_password'])) {
-                $_SESSION['connected'] == 1;
+                $_SESSION['connected'] = 1;
                 $_SESSION['user_id'] = $user['use_id'];
                 $_SESSION['user_name'] = $user['use_name'];
                 $_SESSION['user_email'] = $user['use_login'];
@@ -149,11 +148,25 @@ class UserController
         require 'views/login/login.php';
     }
 
-    #USER PAGE
+    public function showUserPage()
+    {
+        $userModel = new UserModel($this->db);
+        $userId = $_SESSION['user_id'] ?? null;
 
-    public function showUserPage($error = null, $succes = null) {
-        $title = $_SESSION['user_name'] . " - Page";
-        require 'views/userPage.php';
+        if (!$userId) {
+            header('Location: index.php?route=login');
+            exit();
+        }
+
+        $userData = $userModel->getUserById($userId);
+        
+        if (!$userData) {
+            throw new Exception("Utilisateur non trouvé");
+        }
+
+        $title = $userData->getNom() . " - Page";
+
+        require_once 'views/userPage.php';
     }
-
 }
+

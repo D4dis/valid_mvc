@@ -3,12 +3,32 @@
 class User extends CoreEntity
 {
   private $_id;
-  private $_nom;
-  private $_i_mail;
-  private $_mdp;
+  private $_name;
+  private $_login;
+  private $_city;
+  private $_zipcode;
+  private $_siret;
+  private $_company;
+  private $_password;
   private $_skills;
   private $_role;
   private $_permissions;
+
+
+  public function __construct(array $data = [])
+  {
+    $this->hydrate($data);
+  }
+
+  public function hydrate(array $data)
+  {
+    foreach ($data as $key => $value) {
+      $method = 'set' . ucfirst(str_replace('use_', '', $key));
+      if (method_exists($this, $method)) {
+        $this->$method($value);
+      }
+    }
+  }
 
   public function getId()
   {
@@ -17,20 +37,40 @@ class User extends CoreEntity
 
   public function getNom()
   {
-    return $this->_nom;
+    return $this->_name;
   }
 
-  public function getIMail()
+  public function getLogin()
   {
-    return $this->_i_mail;
+    return $this->_login;
+  }
+
+  public function getCity()
+  {
+    return $this->_city;
+  }
+
+  public function getZipcode()
+  {
+    return $this->_zipcode;
+  }
+
+  public function getSiret()
+  {
+    return $this->_siret;
+  }
+
+  public function getCompany()
+  {
+    return $this->_company;
   }
 
   public function getMdp()
   {
-    return $this->_mdp;
+    return $this->_password;
   }
 
-  public function getSkills()
+  public function getSkill()
   {
     return $this->_skills;
   }
@@ -45,38 +85,74 @@ class User extends CoreEntity
     return $this->_permissions;
   }
 
-  public function setId($_id): void
+  public function setId($id): void
   {
-    $this->_id = $_id;
+    $this->_id = $id;
   }
 
-  public function setNom($_nom): void
+  public function setName($name): void
   {
-    $this->_nom = $_nom;
+    $this->_name = $name;
   }
 
-  public function setIMail($_i_mail): void
+  public function setLogin($login): void
   {
-    $this->_i_mail = $_i_mail;
+    $this->_login = $login;
   }
 
-  public function setMdp($_mdp): void
+  public function setPassword($password): void
   {
-    $this->_mdp = $_mdp;
+    $this->_password = $password;
   }
 
-  public function setSkills($_skills): void
+  public function setCity($city): void
   {
-    $this->_skills = $_skills;
+    $this->_city = $city;
   }
 
-  public function setRole($_role): void
+  public function setZipcode($zipcode): void
   {
-    $this->_role = $_role;
+    $this->_zipcode = $zipcode;
+  }
+
+  public function setSiret($siret): void
+  {
+    $this->_siret = $siret;
+  }
+
+  public function setCompany($company): void
+  {
+    $this->_company = $company;
+  }
+
+  public function setSkills($skills): void
+  {
+    $this->_skills = $skills;
+  }
+
+  public function setRol_id($rol_id): void
+  {
+    $this->_role = $rol_id;
   }
 
   public function setPermissions($_permissions): void
   {
     $this->_permissions = $_permissions;
+  }
+
+  // Ajoutez cette méthode pour le débogage
+  public function debug()
+  {
+    return [
+      'id' => $this->_id,
+      'name' => $this->_name,
+      'login' => $this->_login,
+      'city' => $this->_city,
+      'zipcode' => $this->_zipcode,
+      'siret' => $this->_siret,
+      'company' => $this->_company,
+      'skills' => $this->_skills,
+      'role' => $this->_role
+    ];
   }
 }

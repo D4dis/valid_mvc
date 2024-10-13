@@ -1,5 +1,8 @@
 <?php
 
+// echo "<pre>";
+// var_dump($userData->debug());
+// echo "</pre>";
 ?>
 
 <!doctype html>
@@ -16,19 +19,48 @@
   <link rel="stylesheet" href="views/partials/navbar/assets/css/nav.css">
 </head>
 
-<body>
+<body style="background-color: #DADADA;">
 
   <?php include 'partials/navbar/navbar.php'; ?>
 
 
   <div class="container mt-5" style="margin-top: 100px !important;">
-    <h1 class="mb-5">Bonjour, <?= ucfirst($_SESSION['user_name']) ?></h1>
+    <h1 class="mb-5">Bonjour, <?= ucfirst($userData->getNom()) ?></h1>
     <div class="d-flex flex-column gap-5">
-      <h5 class="card-title"><i class="fa-solid fa-envelope"></i> <?= $_SESSION['user_email'] ?></h5>
-      <h5 class="card-title"><i class="fa-solid fa-location-dot"></i> <?= (isset($_SESSION['user_city']) && !empty($_SESSION['user_city'])) ? $_SESSION['user_city'] : 'Non renseigné' ?></h5>
-      <h5 class="card-title"><i class="fa-solid fa-briefcase"></i> <?= (isset($_SESSION['user_skill']) && !empty($_SESSION['user_skill'])) ? $_SESSION['user_skill'] : 'Non renseigné' ?></h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary w-25">Modifier mes informations</a>
+      <h5 class="card-title"><i class="fa-solid fa-envelope"></i> <?= $userData->getLogin() ?></h5>
+      <h5 class="card-title"><i class="fa-solid fa-location-dot"></i> <?= !empty($userData->getCity()) ? $userData->getCity() : 'Non renseigné' ?></h5>
+      <h5 class="card-title"><i class="fa-solid fa-briefcase"></i> <?= !empty($userData->getSkill()) ? $userData->getSkill() : 'Non renseigné' ?></h5>
+      <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Modifier mes informations
+      </button>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier mes informations</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <input class="form-control mb-3" type="text" name="nameUpd" id="name" placeholder="Nom">
+                <input class="form-control mb-3" type="email" name="emailUpd" id="email" placeholder="Email">
+                <input class="form-control mb-3" type="text" name="cityUpd" id="city" placeholder="Ville">
+                <select class="form-select mb-3" name="skillUpd" id="skill">
+                  <option disabled selected>Compétences</option>
+                  <option value="1">PHP</option>
+                  <option value="2">JavaScript</option>
+                  <option value="3">Python</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

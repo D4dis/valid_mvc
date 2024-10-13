@@ -20,7 +20,7 @@ $title = 'Acceuil';
 
 <body>
 
-  <?php include __DIR__ . '/../partials/navbar/navbar.php'; ?>
+  <?php include 'views/partials/navbar/navbar.php'; ?>
 
   <div class="container">
     <div class="top">

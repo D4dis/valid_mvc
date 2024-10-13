@@ -55,4 +55,18 @@ class UserModel extends CoreModel
 
     return $this->_req->fetch(PDO::FETCH_ASSOC);
   }
+
+  public function getUserById($userId)
+  {
+    $sql = "SELECT * FROM _user WHERE use_id = :id";
+    $this->_req = $this->getDb()->prepare($sql);
+    $this->_req->bindValue(':id', $userId, PDO::PARAM_INT);
+    $this->_req->execute();
+
+    $userData = $this->_req->fetch(PDO::FETCH_ASSOC);
+    if ($userData) {
+        return new User($userData);
+    }
+    return null;
+  }
 }
