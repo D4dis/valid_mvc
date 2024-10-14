@@ -7,33 +7,45 @@ require_once 'controllers/HomeController.php';
 
 $db = new PDO(DB_ENGINE . ':host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET, DB_USER, DB_PWD);
 
-$route = $_GET['route'] ?? 'home';
+$ctrl = $_GET['ctrl'] ?? 'home';
+
+$action = $_GET['action'] ?? 'index';
+
+$ctrl = 'HomeController';
+if (isset($_GET['ctrl'])) {
+    $ctrl = ucfirst(strtolower($_GET['ctrl'])) . 'Controller';
+}
+
+
+$method = 'index';
+if (isset($_GET['action'])) {
+    $method = $_GET['action'];
+}
 
 try {
-    switch ($route) {
-        case 'home':
-            $controller = new HomeController($db);
-            $controller->index();
-            break;
+    if (class_exists($ctrl)) {
+        $controller = new $ctrl();
 
-        case 'login':
-            $controller = new UserController($db);
-            $controller->login();
-            break;
+        if (!empty($_POST)) {
 
-        case 'userPage':
-            $controller = new UserController($db);
-            $controller->showUserPage();
-            break;
+            if (method_exists($ctrl, $method)) {
+                if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
+                    $controller->$method($_GET['id'], $_POST);
+                } else {
+                    $controller->$method($_POST);
+                }
+            }
+        } else {
 
-        case 'logout':
-            $controller = new UserController($db);
-            $controller->logout();
-            break;
-
-        default:
-            throw new Exception("Route non trouvée");
+            if (method_exists($ctrl, $method)) {
+                if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
+                    $controller->$method($_GET['id']);
+                } else {
+                    $controller->$method();
+                }
+            }
+        }
     }
 } catch (Exception $e) {
-    echo "Une erreur est survenue : " . $e->getMessage();
+    die($e->getMessage());
 }

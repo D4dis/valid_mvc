@@ -14,18 +14,51 @@ class UserModel extends CoreModel
     }
   }
 
-  public function register(array $data)
+  public function signIn(array $data) {
+    if(!isset($data['emailSignIn']) || !isset($data['pwdSignIn'])) {
+      throw new Exception("Veillez remplir tous les champs");
+    }
+
+    $email = strtolower($data['emailSignIn']);
+    $mdp = strtolower($data['pwdSignIn']);
+
+    $sql = "SELECT use_login, use_password, use_name, use_id FROM _user WHERE use_login = :email";
+
+    try{
+      $this->_req = $this->getDb()->prepare($sql);
+      $this->_req->bindValue(':email', $email, PDO::PARAM_STR);
+      $this->_req->execute();
+      $datas = $this->_req->fetch(PDO::FETCH_ASSOC);
+
+    } catch(PDOException $e) {
+      $e->getMessage();
+    }
+
+    if(password_verify($mdp, $datas['use_password'])){
+      session_start();
+      $_SESSION['connected'] = 1;
+      $_SESSION['id'] = $datas['use_id'];
+      $_SESSION['user_name'] = $datas['use_name'];
+    } else {
+      $_SESSION['error'] = "Identifians ou Mot de passe incorrect";
+      require 'views/login/login.php'; 
+    }
+
+
+  }
+
+  public function signUp(array $data)
   {
     if (!isset($data['role']) || !in_array($data['role'], ['3', '2'])) {
-      throw new Exception("Veuillez sélectionner un rôle valide (Entreprise ou Etudiant).");
+      $_SESSION['error'] = throw new Exception("Veuillez sélectionner un rôle valide (Entreprise ou Etudiant).");
     }
 
     if ($data['pwdSignUp'] !== $data['ConfpwdSignUp']) {
-      throw new Exception("Les mots de passe ne correspondent pas.");
+      $_SESSION['error'] = throw new Exception("Les mots de passe ne correspondent pas.");
     }
 
     if (!filter_var($data['emailSignUp'], FILTER_VALIDATE_EMAIL)) {
-      throw new Exception("Format d'email invalide.");
+      $_SESSION['error'] = throw new Exception("Format d'email invalide.");
     }
 
     $name = strtolower($data['nameSignUp']);
@@ -35,25 +68,21 @@ class UserModel extends CoreModel
     $hashedPassword = password_hash($data['pwdSignUp'], PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO _user (use_name, use_login, use_password, rol_id) VALUES (:name, :mail, :mdp, :role)";
+    try{
     $this->_req = $this->getDb()->prepare($sql);
     $this->_req->bindValue(':name', $name, PDO::PARAM_STR);
     $this->_req->bindValue(':mail', $email, PDO::PARAM_STR);
     $this->_req->bindValue(':mdp', $hashedPassword, PDO::PARAM_STR);
     $this->_req->bindValue(':role', $role, PDO::PARAM_INT);
-
-    if (!$this->_req->execute()) {
-      throw new Exception("Erreur lors de l'enregistrement de l'utilisateur.");
+    } catch(PDOException $e){
+      $e->getMessage();
     }
+    require 'views/login/login.php';
   }
 
-  public function getUserByEmail($email)
-  {
-    $sql = "SELECT * FROM _user WHERE use_login = :email";
-    $this->_req = $this->getDb()->prepare($sql);
-    $this->_req->bindValue(':email', strtolower($email), PDO::PARAM_STR);
-    $this->_req->execute();
-
-    return $this->_req->fetch(PDO::FETCH_ASSOC);
+  public function logout(){
+    session_destroy();
+    unset($_SESSION);
   }
 
   public function getUserById($userId)
@@ -63,10 +92,25 @@ class UserModel extends CoreModel
     $this->_req->bindValue(':id', $userId, PDO::PARAM_INT);
     $this->_req->execute();
 
-    $userData = $this->_req->fetch(PDO::FETCH_ASSOC);
-    if ($userData) {
-        return new User($userData);
+    $datas = $this->_req->fetchAll(PDO::FETCH_ASSOC);
+    return $datas;
+  }
+
+  public function updateUser(int $user_id, array $datas){
+
+    try{
+      $sql = "UPDATE _user SET use_city = :city WHERE use_id = :id";
+      $this->_req = $this->getDb()->prepare($sql);
+      $this->_req->bindValue(':id', $user_id, PDO::PARAM_INT);
+      $this->_req->bindValue(':city', $datas['cityUpd'], PDO::PARAM_STR);
+      // if(!isset($datas['nameUpd']) || empty($datas['nameUpd'])){
+      // }
+    } catch(PDOException $e) {
+      $e->getMessage();
     }
-    return null;
+  }
+
+  public function createOffer(int $user_id, array $datas) {
+    
   }
 }

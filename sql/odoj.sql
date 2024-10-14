@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 12 oct. 2024 à 15:49
+-- Généré le : lun. 14 oct. 2024 à 17:03
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -56,7 +56,8 @@ CREATE TABLE `joboffer` (
   `job_salary` decimal(5,2) DEFAULT NULL,
   `job_status` tinyint(1) DEFAULT NULL,
   `job_requirement` varchar(50) DEFAULT NULL,
-  `use_id` int(11) NOT NULL
+  `use_id_fk` int(11) DEFAULT NULL,
+  `job_city` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -107,15 +108,17 @@ CREATE TABLE `_user` (
   `use_siret` int(11) DEFAULT NULL,
   `use_company` varchar(50) DEFAULT NULL,
   `use_skills` varchar(50) DEFAULT NULL,
-  `rol_id` int(11) NOT NULL
+  `rol_id_fk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `_user`
 --
 
-INSERT INTO `_user` (`use_id`, `use_name`, `use_login`, `use_password`, `use_city`, `use_zipcode`, `use_siret`, `use_company`, `use_skills`, `rol_id`) VALUES
-(1, 'daris', 'daris@email.com', '$2y$10$TuWTq3VuBCOCcOJNb.WY9.yHBIII5Q2Q665OEJxZh1uvGdVQw0X1e', NULL, NULL, NULL, NULL, NULL, 2);
+INSERT INTO `_user` (`use_id`, `use_name`, `use_login`, `use_password`, `use_city`, `use_zipcode`, `use_siret`, `use_company`, `use_skills`, `rol_id_fk`) VALUES
+(5, 'daris', 'daris@email.com', '$2y$10$PguA/lUnYiojWvNEI2V9KuLZ0ZCC9Omi0F5GuualuM8VZqcVJqOSC', NULL, NULL, NULL, NULL, NULL, 2),
+(6, 'tesla', 'tesla@contact.com', '$2y$10$sLdT4w4BorLg2Bu0r60yvO02Z2C9D1JD027BDrEuU7M3OiUedNTo2', NULL, NULL, NULL, NULL, NULL, 3),
+(8, 'jsp', 'jsp@email.com', '$2y$10$N35ncVjsoSoXCWO647KBVuIvVDM29azPHWD3SnJ9LveSu5e13G9Ge', 'Montpellier', NULL, NULL, NULL, NULL, 2);
 
 --
 -- Index pour les tables déchargées
@@ -140,7 +143,7 @@ ALTER TABLE `has`
 --
 ALTER TABLE `joboffer`
   ADD PRIMARY KEY (`job_id`),
-  ADD KEY `use_id` (`use_id`);
+  ADD KEY `use_id` (`use_id_fk`);
 
 --
 -- Index pour la table `role`
@@ -159,7 +162,7 @@ ALTER TABLE `_authorization`
 --
 ALTER TABLE `_user`
   ADD PRIMARY KEY (`use_id`),
-  ADD KEY `rol_id` (`rol_id`);
+  ADD KEY `rol_id` (`rol_id_fk`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -178,16 +181,10 @@ ALTER TABLE `role`
   MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `_authorization`
---
-ALTER TABLE `_authorization`
-  MODIFY `aut_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `_user`
 --
 ALTER TABLE `_user`
-  MODIFY `use_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `use_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Contraintes pour les tables déchargées
@@ -211,13 +208,13 @@ ALTER TABLE `has`
 -- Contraintes pour la table `joboffer`
 --
 ALTER TABLE `joboffer`
-  ADD CONSTRAINT `joboffer_ibfk_1` FOREIGN KEY (`use_id`) REFERENCES `_user` (`use_id`);
+  ADD CONSTRAINT `joboffer_ibfk_1` FOREIGN KEY (`use_id_fk`) REFERENCES `_user` (`use_id`);
 
 --
 -- Contraintes pour la table `_user`
 --
 ALTER TABLE `_user`
-  ADD CONSTRAINT `_user_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `role` (`rol_id`);
+  ADD CONSTRAINT `_user_ibfk_1` FOREIGN KEY (`rol_id_fk`) REFERENCES `role` (`rol_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

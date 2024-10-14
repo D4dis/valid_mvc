@@ -25,20 +25,13 @@ $title = 'Acceuil';
   <div class="container">
     <div class="top">
       <h1>One Day One Job</h1>
-      <p><?= isset($_SESSION) && !empty($_SESSION['user_id']) ?  $_SESSION['user_id'] : '' ?></p>
-      <p><?= isset($_SESSION) && !empty($_SESSION['user_name']) ?  $_SESSION['user_name'] : '' ?></p>
-      <p><?= isset($_SESSION) && !empty($_SESSION['connected']) ?  $_SESSION['connected'] : '' ?></p>
     </div>
     <div class="mid">
-      <form method="get">
+      <form action="" method="get">
         <li class="search-group">
           <div class="search-bar">
             <div class="row">
-              <div class="rowJob">
-                <div class="container-searchJob"><input type="text" class="searchJob" name="searchJob" id="searchJob" autocomplete="off" placeholder="Métiers"></div>
-                <div class="result-box-job">
-                </div>
-              </div>
+              <div class="container-searchJob"><input type="text" class="searchJob" name="searchJob" id="searchJob" autocomplete="off" placeholder="Métiers"></div>
               <div class="line"></div>
               <div class="container-searchLoc"><input type="text" name="searchLoc" id="searchLoc" autocomplete="off" placeholder="Localisation"></div>
               <button type="submit">Filtrer</button>

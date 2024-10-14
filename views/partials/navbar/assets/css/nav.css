@@ -15,6 +15,7 @@ a {
 
 .navbar {
   background-color: #5C6BC0;
+  color: #000;
   position: fixed;
   top: 0;
   width: 100%;
@@ -39,5 +40,10 @@ a {
 
 .navbar .icons {
   display: flex;
+  align-items: center;
   gap: 30px;
+}
+
+.navbar #icon {
+  height: 24px;
 }

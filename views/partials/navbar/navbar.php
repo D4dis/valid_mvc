@@ -3,12 +3,8 @@
     <a href="index.php">One Day One Job</a>
     <div class="icons">
       <!-- <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> -->
-      <?php if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])): ?>
-        <a href="index.php?route=userPage"><i class="fa-solid fa-user"></i></a>
-        <a href="index.php?route=logout">Se deconnecter</a>
-      <?php else: ?>
-        <a href="index.php?route=login"><i class="fa-solid fa-user"></i></a>
-      <?php endif; ?>
+      <a href="index.php?ctrl=userPage&id=<?= (isset($_SESSION['id'])&& !empty($_SESSION['id'])) ? $_SESSION['id'] : '' ?>" id="icon"><i class="fa-solid fa-user"></i></a>
+      <a href="index.php?ctrl=user&action=logout">Se deconnecter</a>
     </div>
   </div>
 </nav>

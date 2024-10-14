@@ -28,9 +28,11 @@ $title = 'One Day One Job';
     <div><?php echo $success; ?></div>
   <?php endif; ?>
 
+  <p><?= (isset($_SESSION['error']) && !empty($_SESSION['error'])) ? $_SESSION['error'] : '' ?></p>
+
   <div class="container" id="container">
     <div class="form-container sign-up">
-      <form action="" method="post">
+      <form action="index.php?ctrl=login&action=signUp" method="post">
         <h1>Créer un compte</h1>
         <span>Utilisez votre email pour vous enregistrer</span>
         <div class="d-flex radioGroupe">
@@ -47,11 +49,11 @@ $title = 'One Day One Job';
       </form>
     </div>
     <div class="form-container sign-in">
-      <form action="" method="post">
+      <form action="index.php?ctrl=login&action=signIn" method="post">
         <h1>Se connecter</h1>
         <span>Utilisez votre email et mot de passe</span>
-        <input type="email" name="emailSignIn" placeholder="Email">
-        <input type="password" name="pwdSignIn" placeholder="Mot de passe">
+        <input type="email" name="emailSignIn" placeholder="Email" required>
+        <input type="password" name="pwdSignIn" placeholder="Mot de passe" required>
         <button type="submit">Se connecter</button>
       </form>
     </div>

@@ -12,7 +12,7 @@ abstract class CoreModel
 
   private $_db;
 
-  public function __construct($_db)
+  public function __construct()
   {
     $this->connect();
   }
