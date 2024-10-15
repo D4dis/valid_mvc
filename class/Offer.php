@@ -4,6 +4,7 @@ class Offer extends CoreEntity
 {
 
   private $_id;
+  private $_name;
   private $_title;
   private $_describe;
   private $_salary;
@@ -15,6 +16,11 @@ class Offer extends CoreEntity
   public function getId()
   {
     return $this->_id;
+  }
+
+  public function getName()
+  {
+    return $this->_name;
   }
 
   public function getTitle()
@@ -57,6 +63,11 @@ class Offer extends CoreEntity
     $this->_id = $_id;
   }
 
+  public function setName($_name): void
+  {
+    $this->_name = $_name;
+  }
+
   public function setTitle($_title): void
   {
     $this->_title = $_title;
@@ -87,7 +98,7 @@ class Offer extends CoreEntity
     $this->_city = $_city;
   }
 
-  public function setIdFk($_id_fk): void
+  public function setId_Fk($_id_fk): void
   {
     $this->_id_fk = $_id_fk;
   }

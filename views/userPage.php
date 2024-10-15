@@ -7,6 +7,9 @@ echo "<br>";
 echo "<pre>";
 var_dump($user);
 echo "</pre>";
+echo "<pre>";
+var_dump($_POST);
+echo "</pre>";
 
 $title = $user->getName() . ' - Page';
 ?>
@@ -51,15 +54,15 @@ $title = $user->getName() . ' - Page';
               <form action="index.php?ctrl=userPage&action=update&id=<?= $user->getId() ?>" method="post">
                 <input class="form-control mb-3" type="text" name="nameUpd" id="name" placeholder="Nom" autocomplete="off">
                 <input class="form-control mb-3" type="email" name="emailUpd" id="email" placeholder="Email">
-                <input class="form-control mb-3" type="text" name="cityUpd" id="city" placeholder="Ville">
+                <input class="form-control mb-3" type="text" name="cityUpd" id="city" value="<?= $user->getCity() ?>" placeholder="Ville">
                 <?php if ($user->getIdFk() == 3) : ?>
                   <input class="form-control mb-3" type="text" name="siretUpd" id="siret" placeholder="Siret">
                 <?php endif; ?>
                 <select class="form-select mb-3" name="skillUpd" id="skill">
                   <option disabled selected>Compétences</option>
-                  <option value="1">PHP</option>
-                  <option value="2">JavaScript</option>
-                  <option value="3">Python</option>
+                  <option value="PHP">PHP</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="Python">Python</option>
                 </select>
             </div>
             <div class="modal-footer">
@@ -85,15 +88,15 @@ $title = $user->getName() . ' - Page';
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="" method="post">
+              <form action="index.php?ctrl=userPage&action=createOffer&id=<?= $user->getId() ?>" method="post">
                 <input class="form-control mb-3" type="text" name="nameOffre" id="name" placeholder="Nom du poste">
                 <input class="form-control mb-3" type="text" name="salaireOffre" id="name" placeholder="Salaire du poste">
-                <input class="form-control mb-3" type="text" name="cityOffre" id="city" placeholder="Ville du poste">
+                <input class="form-control mb-3" type="text" name="cityOffre" id="city"  placeholder="Ville du poste">
                 <select class="form-select mb-3" name="skillOffre" id="skill">
                   <option disabled selected>Compétences du poste</option>
-                  <option value="1">PHP</option>
-                  <option value="2">JavaScript</option>
-                  <option value="3">Python</option>
+                  <option value="PHP">PHP</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="Python">Python</option>
                 </select>
                 <div class="form-floating">
                   <textarea class="form-control" placeholder="Description de l'offre" id="floatingTextarea2" style="height: 100px; resize: none;" name="descOffre"></textarea>

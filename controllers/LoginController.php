@@ -16,7 +16,7 @@ class LoginController {
     $model = new UserModel();
     $model->signIn($_POST);
     if(isset($_SESSION['connected']) && $_SESSION['connected'] == 1){
-      require 'views/home/home.php';
+      header("Location: index.php");
     }
   }
   

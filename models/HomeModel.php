@@ -12,7 +12,7 @@ class HomeModel extends CoreModel {
   }
 
   public function index() {
-    $sql = "SELECT * FROM joboffer";
+    $sql = "SELECT job_id, job_title, job_describe, job_salary, job_status, job_requirement, job_city, use_id use_id_fk, use_name FROM joboffer JOIN _user ON use_id_fk = use_id";
 
     try{
       $this->_req = $this->getDb()->prepare($sql);

@@ -114,7 +114,7 @@ class User extends CoreEntity
     $this->_skills = $_skills;
   }
 
-  public function setIdFk($_id_fk): void
+  public function setId_Fk($_id_fk): void
   {
     $this->_id_fk = $_id_fk;
   }

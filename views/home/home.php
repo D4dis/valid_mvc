@@ -2,6 +2,14 @@
 
 $title = 'Acceuil';
 
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<pre>";
+var_dump($cards);
+echo "</pre>";
+
 ?>
 
 <!DOCTYPE html>
@@ -41,24 +49,25 @@ $title = 'Acceuil';
       </form>
     </div>
     <div class="bot">
-      <a href="">
-        <div class="card">
-          <div class="card-top">
-            <h2>Titre</h2>
-            <h2>Nom entreprise</h2>
+      <?php foreach ($cards as $card) : ?>
+        <a href="">
+          <div class="card">
+            <div class="card-top">
+              <h2><?= $card->getTitle() ?></h2>
+              <h2><?= ucfirst($card->getName()) ?></h2>
+            </div>
+            <div class="card-bot">
+              <div class="type">CDI</div>
+              <div class="location"><i class="fa-solid fa-location-dot"></i><?= ucfirst($card->getCity()) ?></div>
+              <div class="categorie"><i class="fa-solid fa-briefcase"></i><?= ucfirst($card->getRequirement()) ?></div>
+            </div>
           </div>
-          <div class="card-bot">
-            <div class="type">CDI</div>
-            <div class="location"><i class="fa-solid fa-location-dot"></i>Montpellier</div>
-            <div class="categorie"><i class="fa-solid fa-briefcase"></i>Design</div>
-          </div>
-        </div>
-      </a>
+        </a>
+      <?php endforeach; ?>
     </div>
   </div>
 
 </body>
 
-<script src="views/home/assets/js/index.js"></script>
 
 </html>

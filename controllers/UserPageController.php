@@ -21,6 +21,22 @@ class UserPageController
   public function update() {
     $model = new UserModel();
     $model->updateUser($_GET['id'], $_POST);
-    require 'views/userPage.php';
+    $datas = $model->getUserById($_GET['id']);
+    foreach ($datas as $data) {
+      $user = new User($data);
+    }
+    $id = $_SESSION['id'];
+    header("Location: index.php?ctrl=userPage&action=index&id=$id");
+  }
+
+  public function createOffer(){
+    $model = new UserModel();
+    $model->createOffer($_GET['id'], $_POST);
+    $datas = $model->getUserById($_GET['id']);
+    foreach ($datas as $data) {
+      $user = new User($data);
+    }
+    $id = $_SESSION['id'];
+    header("Location: index.php?ctrl=userPage&action=index&id=$id");
   }
 }
