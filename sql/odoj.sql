@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 14 oct. 2024 à 17:03
+-- Généré le : jeu. 17 oct. 2024 à 09:36
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -53,12 +53,19 @@ CREATE TABLE `joboffer` (
   `job_id` int(11) NOT NULL,
   `job_title` varchar(50) DEFAULT NULL,
   `job_describe` varchar(250) DEFAULT NULL,
-  `job_salary` decimal(5,2) DEFAULT NULL,
+  `job_salary` decimal(50,0) DEFAULT NULL,
   `job_status` tinyint(1) DEFAULT NULL,
   `job_requirement` varchar(50) DEFAULT NULL,
   `use_id_fk` int(11) DEFAULT NULL,
   `job_city` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `joboffer`
+--
+
+INSERT INTO `joboffer` (`job_id`, `job_title`, `job_describe`, `job_salary`, `job_status`, `job_requirement`, `use_id_fk`, `job_city`) VALUES
+(1, 'Developpeur Js', 'Cherche dev js urgent la team', 2500, 1, 'JavaScript', 6, 'Montpellier');
 
 -- --------------------------------------------------------
 
@@ -172,7 +179,7 @@ ALTER TABLE `_user`
 -- AUTO_INCREMENT pour la table `joboffer`
 --
 ALTER TABLE `joboffer`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `role`
